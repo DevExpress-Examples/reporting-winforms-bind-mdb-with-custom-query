@@ -17,23 +17,18 @@ namespace RuntimeBindingToMdbDatabase {
 
 #region #code
 private SqlDataSource BindToData() {
-    // Create a data source with the required connection parameters.  
+    // Create a data source with the specified connection parameters.  
     Access97ConnectionParameters connectionParameters = 
         new Access97ConnectionParameters("../../nwind.mdb", "", "");
     SqlDataSource ds = new SqlDataSource(connectionParameters);
-
     // Create an SQL query to access the Products table.
     CustomSqlQuery query = new CustomSqlQuery();
     query.Name = "customQuery";
     query.Sql = "SELECT * FROM Products";
-
-    // Add the query to the collection and return the data source. 
+    // Add the query to the collection.
     ds.Queries.Add(query);
-    
-    // Make the data source structure displayed 
-    // in the Field List of an End-User Report Designer.
+    // Update the data source schema.
     ds.RebuildResultSchema();
-
     return ds;
 }
 
@@ -52,10 +47,11 @@ private XtraReport CreateReport() {
 
     // Create a new label.
     XRLabel label = new XRLabel { WidthF = 300 };
-    // Specify the label's binding depending on the data binding mode.
+    // Bind the label to the data, dependent on the data binding mode.
     if (Settings.Default.UserDesignerOptions.DataBindingMode == DataBindingMode.Bindings)
        label.DataBindings.Add("Text", null, "customQuery.ProductName");
-    else label.ExpressionBindings.Add(new ExpressionBinding("BeforePrint", "Text", "[ProductName]"));
+    else 
+       label.ExpressionBindings.Add(new ExpressionBinding("BeforePrint", "Text", "[ProductName]"));
     // Add the label to the detail band.
     detailBand.Controls.Add(label);
 
@@ -63,13 +59,13 @@ private XtraReport CreateReport() {
 }
 
 private void button1_Click(object sender, EventArgs e) {
-    // Show the report's print preview.
+    // Invoke the report preview.
     ReportPrintTool printTool = new ReportPrintTool(CreateReport());
     printTool.ShowPreview();
 }
 
 private void button2_Click(object sender, EventArgs e) {
-    // Open the report in an End-User Designer.
+    // Invoke the End-User Designer and load the report.
     ReportDesignTool designTool = new ReportDesignTool(CreateReport());
     designTool.ShowRibbonDesignerDialog();
 }

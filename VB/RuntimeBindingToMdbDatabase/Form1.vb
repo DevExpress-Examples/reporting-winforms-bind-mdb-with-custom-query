@@ -4,7 +4,6 @@ Imports System
 Imports DevExpress.DataAccess.Sql
 Imports DevExpress.DataAccess.ConnectionParameters
 Imports DevExpress.XtraReports.UI
-Imports DevExpress.XtraReports.Configuration
 
 ' ...
 '#End Region  ' #reference
@@ -19,17 +18,16 @@ Namespace RuntimeBindingToMdbDatabase
 
 '#Region "#code"
         Private Function BindToData() As SqlDataSource
-            ' Create a data source with the required connection parameters.  
+            ' Create a data source with the specified connection parameters.  
             Dim connectionParameters As Access97ConnectionParameters = New Access97ConnectionParameters("../../nwind.mdb", "", "")
             Dim ds As SqlDataSource = New SqlDataSource(connectionParameters)
             ' Create an SQL query to access the Products table.
             Dim query As CustomSqlQuery = New CustomSqlQuery()
             query.Name = "customQuery"
             query.Sql = "SELECT * FROM Products"
-            ' Add the query to the collection and return the data source. 
+            ' Add the query to the collection. 
             ds.Queries.Add(query)
-            ' Make the data source structure displayed 
-            ' in the Field List of an End-User Report Designer.
+            ' Update the data source schema.
             ds.RebuildResultSchema()
             Return ds
         End Function
@@ -46,8 +44,10 @@ Namespace RuntimeBindingToMdbDatabase
             report.Bands.Add(detailBand)
             ' Create a new label.
             Dim label As XRLabel = New XRLabel With {.WidthF = 300}
-            ' Specify the label's binding depending on the data binding mode.
-            If Settings.Default.UserDesignerOptions.DataBindingMode = DataBindingMode.Bindings Then
+
+            ' Bind the label to the data, dependent on the data binding mode.
+            Dim DesignerOptions = DevExpress.XtraReports.Configuration.Settings.Default.UserDesignerOptions
+            If DesignerOptions.DataBindingMode = DataBindingMode.Bindings Then
                 label.DataBindings.Add("Text", Nothing, "customQuery.ProductName")
             Else
                 label.ExpressionBindings.Add(New ExpressionBinding("BeforePrint", "Text", "[ProductName]"))
@@ -59,13 +59,13 @@ Namespace RuntimeBindingToMdbDatabase
         End Function
 
         Private Sub button1_Click(ByVal sender As Object, ByVal e As EventArgs)
-            ' Show the report's print preview.
+            ' Invoke the report preview.
             Dim printTool As ReportPrintTool = New ReportPrintTool(CreateReport())
             printTool.ShowPreview()
         End Sub
 
         Private Sub button2_Click(ByVal sender As Object, ByVal e As EventArgs)
-            ' Open the report in an End-User Designer.
+            ' Invoke the End-User Designer and load the report.
             Dim designTool As ReportDesignTool = New ReportDesignTool(CreateReport())
             designTool.ShowRibbonDesignerDialog()
         End Sub

@@ -1,21 +1,19 @@
-<!-- default badges list -->
-![](https://img.shields.io/endpoint?url=https://codecentral.devexpress.com/api/v1/VersionRange/128602565/17.2.3%2B)
-[![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/E1357)
-[![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
-<!-- default badges end -->
-<!-- default file list -->
-*Files to look at*:
-
-* [Form1.cs](./CS/RuntimeBindingToMdbDatabase/Form1.cs) (VB: [Form1.vb](./VB/RuntimeBindingToMdbDatabase/Form1.vb))
-* [Program.cs](./CS/RuntimeBindingToMdbDatabase/Program.cs) (VB: [Program.vb](./VB/RuntimeBindingToMdbDatabase/Program.vb))
-<!-- default file list end -->
-# How to programmatically bind a report to an MDB file using a CustomSqlQuery
+# How to Bind a Report to a Microsoft Access Database with a CustomSqlQuery in Code
 
 
-<p>This example demonstrates how to create a new blank report (an instance of the <a href="https://documentation.devexpress.com/#XtraReports/clsDevExpressXtraReportsUIXtraReporttopic">XtraReport</a> class), bind it to an MDB file, and fill the report's <a href="https://documentation.devexpress.com/#XtraReports/clsDevExpressXtraReportsUIDetailBandtopic">DetailBand</a> with an <a href="https://documentation.devexpress.com/#XtraReports/clsDevExpressXtraReportsUIXRLabeltopic">XRLabel</a> control displaying data from this file. </p>
-<p>Create a <a href="https://documentation.devexpress.com/#CoreLibraries/clsDevExpressDataAccessSqlSqlDataSourcetopic">SqlDataSource</a> class instance with the required connection parameters and construct a custom SQL query using the <a href="https://documentation.devexpress.com/#CoreLibraries/clsDevExpressDataAccessSqlCustomSqlQuerytopic">CustomSqlQuery</a> class. To assign the created data source to the report, use the report's <a href="https://documentation.devexpress.com/#XtraReports/DevExpressXtraReportsUIXtraReportBase_DataSourcetopic">DataSource</a> and <a href="https://documentation.devexpress.com/#XtraReports/DevExpressXtraReportsUIXtraReportBase_DataMembertopic">DataMember</a> properties.<br><br>Starting with v.17.2, the report uses <a href="https://documentation.devexpress.com/XtraReports/119236/Creating-Reports-in-Visual-Studio/Detailed-Guide-to-DevExpress-Reporting/Providing-Data-to-Reports/Data-Binding-Overview/Data-Binding-Modes">expression bindings</a> to provide data to controls. You can switch to the legacy binding mode by setting the <a href="https://documentation.devexpress.com/XtraReports/DevExpress.XtraReports.Configuration.UserDesignerOptions.DataBindingMode.property">UserDesignerOptions.DataBindingMode</a> property to <strong>Bindings </strong>at the application startup.<br><strong><br>See Also</strong></p>
-<p><a href="https://www.devexpress.com/Support/Center/Example/Details/T437883">How to programmatically bind a report to an MDB file using a SelectQuery</a></p>
+This example creates the data source that retrieves data from the .MDB file with the SQL query created from SQL string, and displays data in a simple report created at runtime.
 
-<br/>
+The [SqlDataSource](https://docs.devexpress.com/CoreLibraries/DevExpress.DataAccess.Sql.SqlDataSource) instance is created at runtime with the connection string that specifies the MDB file location. The data source needs a query to retrieve data. In this example, a query is the [CustomSqlQuery](https://docs.devexpress.com/CoreLibraries/DevExpress.DataAccess.Sql.CustomSqlQuery) instance created from a SQL string. The newly created query is added to the [SqlDataSource.Queries](https://docs.devexpress.com/CoreLibraries/DevExpress.DataAccess.Sql.SqlDataSource.Queries) collection. 
 
+A report is the [XtraReport](https://docs.devexpress.com/XtraReports/DevExpress.XtraReports.UI.XtraReport) class instance that contains a [Detailband](https://docs.devexpress.com/XtraReports/DevExpress.XtraReports.UI.DetailBand) and a [Label](https://docs.devexpress.com/XtraReports/DevExpress.XtraReports.UI.XRLabel) control. Depending on the [Data Binding mode](https://docs.devexpress.com/XtraReports/119236/detailed-guide-to-devexpress-reporting/use-expressions/data-binding-modes), the control uses the [DataBindings](https://docs.devexpress.com/XtraReports/DevExpress.XtraReports.UI.XRControl.DataBindings) or the [ExpressionBindings](https://docs.devexpress.com/XtraReports/DevExpress.XtraReports.UI.XRControl.ExpressionBindings) property to bind to data.
+
+Use the report's [DataSource](https://docs.devexpress.com/XtraReports/DevExpress.XtraReports.UI.XtraReportBase.DataSource) and [DataMember](https://docs.devexpress.com/XtraReports/DevExpress.XtraReports.UI.XtraReportBase.DataMemeber) properties to assign the data source to the report.
+
+## Files to Look At
+
+* [Form1.cs](CS/RuntimeBindingToMdbDatabase/Form1.cs) (VB: [Form1.vb](VB/RuntimeBindingToMdbDatabase/Form1.vb))
+
+## Documentation
+
+* [Bind Reports to Data](https://docs.devexpress.com/XtraReports/15034/detailed-guide-to-devexpress-reporting/bind-reports-to-data)
 
