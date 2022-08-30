@@ -3,7 +3,7 @@
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/E1357)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
-# How to Bind a Report to a Microsoft Access Database with a CustomSqlQuery in Code
+# How to Bind a Report to a Microsoft Access Database Using CustomSqlQuery in Code
 
 
 This example creates the data source that retrieves data from the .MDB file with the SQL query created from SQL string, and displays data in a simple report created at runtime.
