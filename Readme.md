@@ -1,11 +1,12 @@
 <!-- default badges list -->
+![](https://img.shields.io/endpoint?url=https://codecentral.devexpress.com/api/v1/VersionRange/128602565/21.2.3%2B)
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/E1357)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
 # How to Bind a Report to a Microsoft Access Database Using CustomSqlQuery in Code
 
 
-This example creates the data source that retrieves data from the .MDB file with the SQL query created from SQL string, and displays data in a simple report created at runtime.
+This example creates a data source that retrieves data from an .MDB file with a SQL query created from a SQL string, and displays data in a simple report created at runtime.
 
 The [SqlDataSource](https://docs.devexpress.com/CoreLibraries/DevExpress.DataAccess.Sql.SqlDataSource) instance is created at runtime with the connection string that specifies the MDB file location. The data source needs a query to retrieve data. In this example, a query is the [CustomSqlQuery](https://docs.devexpress.com/CoreLibraries/DevExpress.DataAccess.Sql.CustomSqlQuery) instance created from a SQL string. The newly created query is added to the [SqlDataSource.Queries](https://docs.devexpress.com/CoreLibraries/DevExpress.DataAccess.Sql.SqlDataSource.Queries) collection. 
 
